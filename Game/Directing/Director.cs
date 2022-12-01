@@ -23,7 +23,7 @@ namespace Unit04.Game.Directing
         private KeyboardService _keyboardService = null;
         private VideoService _videoService = null;
         private Random random = new Random();
-
+        private Point stopped = new Point(0, 0);
 
         /// <summary>
         /// Constructs a new instance of Director using the given KeyboardService and VideoService.
@@ -95,8 +95,8 @@ namespace Unit04.Game.Directing
                     artifact.SetPosition(position);
                 }
                 actor.MoveNext(maxX, maxY);
-                if (actor.GetPosition().GetY() > maxY){
-
+                if (robot.GetPosition().GetY() > maxY){
+                    robot.SetVelocity(stopped);
                 }
             } 
         }
