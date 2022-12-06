@@ -80,7 +80,7 @@ namespace Unit04
 
                 int x = random.Next(1, COLS);
                 int y = random.Next(1, ROWS);
-                Point position = new Point(x, y);
+                Point position = new Point(COLS, y);
                 position = position.Scale(CELL_SIZE);
 
                 int r = random.Next(0, 256);
