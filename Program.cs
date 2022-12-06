@@ -61,7 +61,7 @@ namespace Unit04
 
             // create the artifacts
             Random random = new Random();
-            for (int i = 0; i < 0; i++)
+            for (int i = 0; i < 10; i++)
             {
                 //set generic info for artifact
                 string text = "F";
@@ -94,7 +94,7 @@ namespace Unit04
                 artifact.SetColor(color);
                 artifact.SetPosition(position);
                 artifact.SetMessage(message);
-                Point falling = new Point(0, random.Next(3,8));
+                Point falling = new Point(-random.Next(3,8), 0);
                 artifact.SetVelocity(falling);
                 cast.AddActor("artifacts", artifact);
             }
