@@ -53,7 +53,7 @@ namespace Unit04
             robot.SetText("#");
             robot.SetFontSize(FONT_SIZE);
             robot.SetColor(WHITE);
-            robot.SetPosition(new Point(100, 585));
+            robot.SetPosition(new Point(100, 485));
             cast.AddActor("robot", robot);
 
             // load the messages
