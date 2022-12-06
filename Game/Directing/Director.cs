@@ -24,6 +24,7 @@ namespace Unit04.Game.Directing
         private VideoService _videoService = null;
         private Random random = new Random();
         private Point stopped = new Point(0, 0);
+        private Point bottom = new Point(100, 500);
 
         /// <summary>
         /// Constructs a new instance of Director using the given KeyboardService and VideoService.
@@ -77,7 +78,16 @@ namespace Unit04.Game.Directing
             banner.SetText(banner.getValue().ToString());
             int maxX = _videoService.GetWidth();
             int maxY = _videoService.GetHeight();
+            int gravity = 9;
+            int movement = 0;
+
             robot.MoveNext(maxX, maxY);
+
+            //ADD BASE LINE THAT ROBOT CANT GO BELOW 
+             if (robot.GetPosition().GetY() > 500 ){
+                    robot.SetPosition(bottom);
+                }
+
 
             foreach (Actor actor in artifacts)
             {
@@ -95,9 +105,7 @@ namespace Unit04.Game.Directing
                     artifact.SetPosition(position);
                 }
                 actor.MoveNext(maxX, maxY);
-                if (robot.GetPosition().GetY() > maxY){
-                    robot.SetVelocity(stopped);
-                }
+               
             } 
         }
 
