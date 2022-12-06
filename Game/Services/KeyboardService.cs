@@ -32,6 +32,7 @@ namespace Unit04.Game.Services
         {
             int dx = 0;
             int dy = 0;
+            int velocity = 0;
 
             // if (Raylib.IsKeyDown(KeyboardKey.KEY_LEFT))
             // {
@@ -47,6 +48,7 @@ namespace Unit04.Game.Services
             if (Raylib.IsKeyDown(KeyboardKey.KEY_UP))
             {
                 dy = -1;
+                // velocity = 3;
             }
 
             if (Raylib.IsKeyDown(KeyboardKey.KEY_DOWN))

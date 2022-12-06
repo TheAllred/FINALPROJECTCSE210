@@ -85,8 +85,10 @@ namespace Unit04.Game.Casting
         /// <param name="maxY">The maximum y value.</param>
         public void MoveNext(int maxX, int maxY)
         {
-            int x = ((_position.GetX() + _velocity.GetX()) + maxX) % maxX;
-            int y = ((_position.GetY() + _velocity.GetY()) + maxY) % maxY;
+            int gravity = -15;
+        
+            int x = ((_position.GetX() + _velocity.GetX()));
+            int y = ((_position.GetY() + _velocity.GetY()));
             _position = new Point(x, y);
         }
 
