@@ -61,7 +61,7 @@ namespace Unit04
 
             // create the artifacts
             Random random = new Random();
-            for (int i = 0; i < DEFAULT_ARTIFACTS; i++)
+            for (int i = 0; i < 0; i++)
             {
                 //set generic info for artifact
                 string text = "F";
