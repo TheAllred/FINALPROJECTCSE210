@@ -26,52 +26,10 @@ namespace Unit04
         private static string DATA_PATH = "Data/messages.txt";
         private static Color WHITE = new Color(255, 255, 255);
         private static int DEFAULT_ARTIFACTS = 40;
-        private static int rand_x;
+    
         
         
-        public void GenerateObstacles(Cast cast)  
-        {
-            Random random = new Random();
-            //set generic info for artifact
-            string text = "F";
-            int message = 4;
-            //decide if the artifact will be a gem or a rock 
-            int gemOrRock = random.Next(0,3);
-            Point position = new Point(0, 0);
-            position = position.Scale(15);
-            rand_x = random.Next(900, 1800);
-            if(gemOrRock==1){
-                text = "1";
-                Point _point1 = new Point(rand_x,500);
-                position = _point1;
-            }
-            else if(gemOrRock == 2){
-                text = "2";
-                Point _point2 = new Point(rand_x,400);
-                position = _point2;
-            }
-            else{
-                text = "0";
-                Point _point3 = new Point(rand_x,350);
-                position = _point3;
-                    
-            }
-
-            int r = random.Next(0, 256);
-            int g = random.Next(0, 256);
-            int b = random.Next(0, 256);
-            Color color = new Color(r, g, b);
-
-            Artifact artifact = new Artifact();
-            artifact.SetText(text);
-            artifact.SetFontSize(15);
-            artifact.SetColor(color);
-            artifact.SetPosition(position);
-            artifact.SetMessage(message);
-            Point falling = new Point(-20, 0);
-            artifact.SetVelocity(falling);
-            cast.AddActor("artifacts", artifact);
-        }
+        
 
 
         /// <summary>
