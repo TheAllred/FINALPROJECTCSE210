@@ -25,6 +25,9 @@ namespace Unit04
         private static string DATA_PATH = "Data/messages.txt";
         private static Color WHITE = new Color(255, 255, 255);
         private static int DEFAULT_ARTIFACTS = 40;
+        private static int rand_x;
+        
+          
 
 
         /// <summary>
@@ -38,7 +41,10 @@ namespace Unit04
 
             // create the banner
             Actor banner = new Actor();
+            Random random = new Random();
             
+            
+             
             
             banner.SetText(banner.getValue().ToString());
 
@@ -59,28 +65,37 @@ namespace Unit04
             // List<int> messages = File.ReadAllLines(DATA_PATH).ToList<int>();
 
             // create the artifacts
-            Random random = new Random();
+            
             for (int i = 0; i < 10; i++)
             {
                 //set generic info for artifact
                 string text = "F";
                 int message = 4;
                 //decide if the artifact will be a gem or a rock 
-                int gemOrRock = random.Next(0,2);
+                int gemOrRock = random.Next(0,3);
+                Point position = new Point(0, 0);
+                position = position.Scale(CELL_SIZE);
+                rand_x = random.Next(900, 1800);
                 if(gemOrRock==1){
-                    text = "*";
-                     message = 1;
+                    text = "1";
+                    Point _point1 = new Point(rand_x,500);
+                    position = _point1;
+                }
+                else if(gemOrRock == 2){
+                    text = "2";
+                    Point _point2 = new Point(rand_x,400);
+                    position = _point2;
                 }
                 else{
-                    text = "#";
-                     message = -1;
+                    text = "0";
+                    Point _point3 = new Point(rand_x,350);
+                    position = _point3;
+                     
              }
                 
 
-                int x = random.Next(1, COLS);
-                int y = random.Next(23, 33);
-                Point position = new Point(COLS, y);
-                position = position.Scale(CELL_SIZE);
+                
+                
 
                 int r = random.Next(0, 256);
                 int g = random.Next(0, 256);
@@ -93,7 +108,7 @@ namespace Unit04
                 artifact.SetColor(color);
                 artifact.SetPosition(position);
                 artifact.SetMessage(message);
-                Point falling = new Point(-random.Next(3,8), 0);
+                Point falling = new Point(-20, 0);
                 artifact.SetVelocity(falling);
                 cast.AddActor("artifacts", artifact);
             }
