@@ -47,14 +47,14 @@ namespace Unit04.Game.Services
 
             if (Raylib.IsKeyDown(KeyboardKey.KEY_UP))
             {
-                dy = -40;
+                dy = -50;
                 // velocity = 3;
             }
 
-            if (Raylib.IsKeyDown(KeyboardKey.KEY_DOWN))
-            {
-                dy = 20;
-            }
+            // if (Raylib.IsKeyDown(KeyboardKey.KEY_DOWN))
+            // {
+            //     dy = 20;
+            // }
 
             Point direction = new Point(dx, dy);
             // direction = direction.Scale(_cellSize);
