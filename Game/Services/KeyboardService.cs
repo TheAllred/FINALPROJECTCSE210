@@ -47,7 +47,7 @@ namespace Unit04.Game.Services
 
             if (Raylib.IsKeyDown(KeyboardKey.KEY_UP))
             {
-                dy = -40;
+                dy = -20;
                 // velocity = 3;
             }
 
