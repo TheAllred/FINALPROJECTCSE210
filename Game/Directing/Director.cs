@@ -57,36 +57,18 @@ namespace Unit04.Game.Directing
             _videoService.CloseWindow();
         }
 
-       
+        /// <summary>
+        /// Gets directional input from the keyboard and applies it to the robot.
+        /// </summary>
+        /// <param name="cast">The given cast.</param>
         private void HandleCollisions(Cast cast){
             Actor robot = cast.GetFirstActor("robot");
             List<Actor> artifacts = cast.GetActors("artifacts");
 
-            foreach (Actor actor in artifacts)
-            {
-                if ()
-                // robot.GetPosition().GetY()<actor.GetPosition().GetY()
-                //  && actor.GetPosition().GetY() > robot.GetPosition().GetY() + CELL_SIZE 
-                //  && robot.GetPosition().GetX()<actor.GetPosition().GetX() 
-                //  && actor.GetPosition().GetX() > robot.GetPosition().GetX() + CELL_SIZE
-                {
-                    Artifact artifact = (Artifact) actor;
-                    int message = artifact.GetMessage();
-                    // banner.addValue(message);
-                    // banner.SetText(banner.getValue().ToString());
-                    
-                        
-                        Point position = new Point(x, y);
-                        // position = position.Scale(CELL_SIZE);
-                    artifact.SetPosition(position);
-                }
-                actor.MoveNext(maxX, maxY);
-            } 
+            
+
+
         }
-         /// <summary>
-        /// Gets directional input from the keyboard and applies it to the robot.
-        /// </summary>
-        /// <param name="cast">The given cast.</param>
         private void GetInputs(Cast cast)
         {
             Actor robot = cast.GetFirstActor("robot");
@@ -123,6 +105,26 @@ namespace Unit04.Game.Directing
              if (robot.GetPosition().GetY() > 500 ){
                     robot.SetPosition(bottom);
                 }
+
+                foreach (Actor actor in artifacts)
+            {
+                if (robot.GetPosition().Equals(actor.GetPosition()))
+                {
+                    Artifact artifact = (Artifact) actor;
+                    int message = artifact.GetMessage();
+                    // banner.addValue(message);
+                    // banner.SetText(banner.getValue().ToString());
+                    
+                        int x = random.Next(1, COLS);
+                    
+                        int y = 0;
+                        Point position = new Point(x, y);
+                        // position = position.Scale(CELL_SIZE);
+                    artifact.SetPosition(position);
+                }
+                actor.MoveNext(maxX, maxY);
+               
+            } 
         }
 
         /// <summary>
