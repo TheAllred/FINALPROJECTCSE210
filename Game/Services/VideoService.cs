@@ -55,7 +55,7 @@ namespace Unit04.Game.Services
             {
                 DrawGrid();
             }
-            Raylib.DrawLine(0, 500, 900, 500,  Raylib_cs.Color.GRAY);
+            Raylib.DrawLine(0, 515, 900, 515,  Raylib_cs.Color.GRAY);
         }
 
         /// <summary>
