@@ -39,8 +39,7 @@ namespace Unit04
             // create the banner
             Actor banner = new Actor();
             
-            banner.SetText(banner.getValue().ToString());
-            banner.addValue(2);
+            
             banner.SetText(banner.getValue().ToString());
 
             banner.SetFontSize(FONT_SIZE);

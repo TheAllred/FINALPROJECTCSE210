@@ -26,6 +26,9 @@ namespace Unit04.Game.Directing
         private Point stopped = new Point(0, 0);
         private Point bottom = new Point(100, 500);
 
+        private Point gravity = new Point(0,0);
+        private Point gravityCONST = new Point(0,5);
+
         /// <summary>
         /// Constructs a new instance of Director using the given KeyboardService and VideoService.
         /// </summary>
@@ -61,8 +64,16 @@ namespace Unit04.Game.Directing
         private void GetInputs(Cast cast)
         {
             Actor robot = cast.GetFirstActor("robot");
-            Point velocity = _keyboardService.GetDirection();
-            robot.SetVelocity(velocity);     
+            
+            if (robot.GetPosition().GetY()>480){
+            gravity = gravity.Add(_keyboardService.GetDirection());}
+            if (robot.GetPosition().GetY()<480){
+            gravity = gravity.Add(gravityCONST);
+            }
+            if (robot.GetPosition().GetY()>485){
+                gravity = stopped.Add(_keyboardService.GetDirection());
+            }
+            robot.SetVelocity(gravity);     
         }
 
         /// <summary>
@@ -75,12 +86,11 @@ namespace Unit04.Game.Directing
             Actor robot = cast.GetFirstActor("robot");
             List<Actor> artifacts = cast.GetActors("artifacts");
 
-            banner.SetText(banner.getValue().ToString());
+            // banner.SetText(banner.getValue().ToString());
+            // banner.SetText(robot.GetPosition().GetY().ToString());
+            banner.SetText(gravity.GetY().ToString());
             int maxX = _videoService.GetWidth();
             int maxY = _videoService.GetHeight();
-            int gravity = 9;
-            int movement = 0;
-
             robot.MoveNext(maxX, maxY);
 
             //ADD BASE LINE THAT ROBOT CANT GO BELOW 
@@ -95,13 +105,14 @@ namespace Unit04.Game.Directing
                 {
                     Artifact artifact = (Artifact) actor;
                     int message = artifact.GetMessage();
-                    banner.addValue(message);
-                    banner.SetText(banner.getValue().ToString());
+                    // banner.addValue(message);
+                    // banner.SetText(banner.getValue().ToString());
+                    
                         int x = random.Next(1, COLS);
                     
                         int y = 0;
                         Point position = new Point(x, y);
-                        position = position.Scale(CELL_SIZE);
+                        // position = position.Scale(CELL_SIZE);
                     artifact.SetPosition(position);
                 }
                 actor.MoveNext(maxX, maxY);
