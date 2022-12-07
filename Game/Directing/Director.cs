@@ -54,6 +54,7 @@ namespace Unit04.Game.Directing
             {
                 GetInputs(cast);
                 DoUpdates(cast);
+                HandleCollisions(cast);
                 DoOutputs(cast);
             }
             _videoService.CloseWindow();
@@ -66,10 +67,20 @@ namespace Unit04.Game.Directing
         private void HandleCollisions(Cast cast){
             Actor robot = cast.GetFirstActor("robot");
             List<Actor> artifacts = cast.GetActors("artifacts");
+            Color RED = new Color(255, 0, 0);
 
-            
+              foreach (Actor actor in artifacts)
+            {
+                int actorX = actor.GetPosition().GetX()+(CELL_SIZE/2);
+                int actorY = actor.GetPosition().GetY()+(CELL_SIZE/2);
+                int robotX = robot.GetPosition().GetX()-5;
+                int robotY = robot.GetPosition().GetY()-5;
 
-
+            if (actorX<(robotX+CELL_SIZE+5)&&actorX>robotX&&actorY<(robotY+CELL_SIZE+5)&&actorY>robotY)
+                {
+                    robot.SetColor(RED);
+                }
+            } 
         }
         private void GetInputs(Cast cast)
         {
@@ -110,20 +121,6 @@ namespace Unit04.Game.Directing
 
                 foreach (Actor actor in artifacts)
             {
-                if (robot.GetPosition().Equals(actor.GetPosition()))
-                {
-                    Artifact artifact = (Artifact) actor;
-                    int message = artifact.GetMessage();
-                    // banner.addValue(message);
-                    // banner.SetText(banner.getValue().ToString());
-                    
-                        int x = random.Next(1, COLS);
-                    
-                        int y = 0;
-                        Point position = new Point(x, y);
-                        // position = position.Scale(CELL_SIZE);
-                    artifact.SetPosition(position);
-                }
                 actor.MoveNext(maxX, maxY);
                count += 1;
             } 
