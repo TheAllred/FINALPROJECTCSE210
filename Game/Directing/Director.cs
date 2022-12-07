@@ -27,7 +27,7 @@ namespace Unit04.Game.Directing
         private Point bottom = new Point(100, 500);
 
         private Point gravity = new Point(0,0);
-        private Point gravityCONST = new Point(0,9);
+        private Point gravityCONST = new Point(0,10);
 
         /// <summary>
         /// Constructs a new instance of Director using the given KeyboardService and VideoService.
