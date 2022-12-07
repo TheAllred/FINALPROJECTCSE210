@@ -44,7 +44,6 @@ namespace Unit04.Game.Casting
                 Random random = new Random();
                 //set generic info for artifact
                 string text = "F";
-                int message = 4;
                 //decide if the artifact will be a gem or a rock 
                 int gemOrRock = random.Next(0,3);
                 Point position = new Point(0, 0);
@@ -72,12 +71,12 @@ namespace Unit04.Game.Casting
                 int b = random.Next(0, 256);
                 Color color = new Color(r, g, b);
 
-                Artifact artifact = new Artifact();
+                Actor artifact = new Actor();
                 artifact.SetText(text);
                 artifact.SetFontSize(15);
                 artifact.SetColor(color);
                 artifact.SetPosition(position);
-                artifact.SetMessage(message);
+                
                 Point falling = new Point(-20, 0);
                 artifact.SetVelocity(falling);
                 cast.AddActor("artifacts", artifact);
