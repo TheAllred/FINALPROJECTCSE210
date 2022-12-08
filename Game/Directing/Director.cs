@@ -30,6 +30,7 @@ namespace Unit04.Game.Directing
         private Point gravityCONST = new Point(0,10);
         private int count = 0;
         private int rand_x;
+        private bool gameIsRunning = true;
 
         /// <summary>
         /// Constructs a new instance of Director using the given KeyboardService and VideoService.
@@ -49,8 +50,9 @@ namespace Unit04.Game.Directing
         /// <param name="cast">The given cast.</param>
         public void StartGame(Cast cast)
         {
+            gameIsRunning = true;
             _videoService.OpenWindow();
-            while (_videoService.IsWindowOpen())
+            while (gameIsRunning)
             {
                 GetInputs(cast);
                 DoUpdates(cast);
@@ -58,6 +60,11 @@ namespace Unit04.Game.Directing
                 DoOutputs(cast);
             }
             _videoService.CloseWindow();
+        }
+
+        public void EndGame(Cast cast)
+        {
+            gameIsRunning = false;
         }
 
         /// <summary>
@@ -108,7 +115,9 @@ namespace Unit04.Game.Directing
             List<Actor> artifacts = cast.GetActors("artifacts");
 
             // banner.SetText(banner.getValue().ToString());
-            banner.SetText(robot.GetPosition().GetY().ToString());
+            // banner.SetText(robot.GetPosition().GetY().ToString());
+            banner.SetText(count.ToString());
+
             // banner.SetText(gravity.GetY().ToString());
             int maxX = _videoService.GetWidth();
             int maxY = _videoService.GetHeight();
