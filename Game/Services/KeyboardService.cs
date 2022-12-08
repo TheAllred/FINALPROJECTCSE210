@@ -28,7 +28,7 @@ namespace Unit04.Game.Services
         /// Gets the selected direction based on the currently pressed keys.
         /// </summary>
         /// <returns>The direction as an instance of Point.</returns>
-        public Point GetDirection()
+        public Point GetDirection(RaylibAudioService audioService)
         {
             int dx = 0;
             int dy = 0;
@@ -48,6 +48,8 @@ namespace Unit04.Game.Services
             if (Raylib.IsKeyDown(KeyboardKey.KEY_UP))
             {
                 dy = -50;
+                Casting.Sound sound = new Casting.Sound("/Users/sammie/git/FINALPROJECTCSE210/Assets/Sound/maro-jump-sound-effect_1.wav");
+                audioService.PlaySound(sound);
                 // velocity = 3;
             }
 

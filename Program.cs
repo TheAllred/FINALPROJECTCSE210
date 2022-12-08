@@ -71,7 +71,8 @@ namespace Unit04
             KeyboardService keyboardService = new KeyboardService(CELL_SIZE);
             VideoService videoService 
                 = new VideoService(CAPTION, MAX_X, MAX_Y, CELL_SIZE, FRAME_RATE, false);
-            Director director = new Director(keyboardService, videoService);
+            RaylibAudioService audioService = new RaylibAudioService();
+            Director director = new Director(keyboardService, videoService, audioService);
             director.StartGame(cast);
         }
     }

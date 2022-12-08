@@ -22,6 +22,7 @@ namespace Unit04.Game.Directing
         private static int MAX_Y = 600;
         private KeyboardService _keyboardService = null;
         private VideoService _videoService = null;
+        private RaylibAudioService _audioService = null;
         private Random random = new Random();
         private Point stopped = new Point(0, 0);
         private Point bottom = new Point(100, 500);
@@ -37,10 +38,11 @@ namespace Unit04.Game.Directing
         /// </summary>
         /// <param name="keyboardService">The given KeyboardService.</param>
         /// <param name="videoService">The given VideoService.</param>
-        public Director(KeyboardService keyboardService, VideoService videoService)
+        public Director(KeyboardService keyboardService, VideoService videoService, RaylibAudioService audioService)
         {
             this._keyboardService = keyboardService;
             this._videoService = videoService;
+            this._audioService = audioService;
 
         }
 
@@ -52,6 +54,8 @@ namespace Unit04.Game.Directing
         {
             gameIsRunning = true;
             _videoService.OpenWindow();
+            _audioService.Initialize();
+            _audioService.LoadSounds("/Users/sammie/git/FINALPROJECTCSE210/Assets/Sound");
             while (gameIsRunning)
             {
                 GetInputs(cast);
@@ -59,6 +63,7 @@ namespace Unit04.Game.Directing
                 HandleCollisions(cast);
                 DoOutputs(cast);
             }
+            // _audioService.UnloadSounds();
             _videoService.CloseWindow();
         }
 
@@ -94,12 +99,12 @@ namespace Unit04.Game.Directing
             Actor robot = cast.GetFirstActor("robot");
             
             if (robot.GetPosition().GetY()>480){
-            gravity = gravity.Add(_keyboardService.GetDirection());}
+            gravity = gravity.Add(_keyboardService.GetDirection(_audioService));}
             if (robot.GetPosition().GetY()<480){
             gravity = gravity.Add(gravityCONST);
             }
             if (robot.GetPosition().GetY()>485){
-                gravity = stopped.Add(_keyboardService.GetDirection());
+                gravity = stopped.Add(_keyboardService.GetDirection(_audioService));
             }
             robot.SetVelocity(gravity);     
         }
