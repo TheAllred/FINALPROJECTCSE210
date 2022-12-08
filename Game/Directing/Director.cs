@@ -148,16 +148,16 @@ namespace Unit04.Game.Directing
             string text = "F";
             int message = 4;
             //decide if the artifact will be a gem or a rock 
-            int gemOrRock = random.Next(0,3);
+            int gemOrRock = random.Next(0,10);
             Point position = new Point(0, 0);
             position = position.Scale(15);
             rand_x = random.Next(900, 1800);
-            if(gemOrRock==1){
+            if(gemOrRock <= 7){
                 text = "1";
                 Point _point1 = new Point(MAX_X,500);
                 position = _point1;
             }
-            else if(gemOrRock == 2){
+            else if(gemOrRock == 8){
                 text = "2";
                 Point _point2 = new Point(MAX_X,400);
                 position = _point2;
