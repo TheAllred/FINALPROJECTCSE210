@@ -14,7 +14,8 @@ namespace Unit04.Game.Directing
     /// </summary>
     public class Director
     {
-         
+         private static Color WHITE = new Color(255, 255, 255);
+        private static int FONT_SIZE = 15;
          private static int CELL_SIZE = 15;
         private static int COLS = 60;
         private static int ROWS = 40;
@@ -48,11 +49,39 @@ namespace Unit04.Game.Directing
         /// Starts the game by running the main game loop for the given cast.
         /// </summary>
         /// <param name="cast">The given cast.</param>
-        public void StartGame(Cast cast)
+        public void StartGame()
         {
+            Cast cast = new Cast();
             gameIsRunning = true;
+            // create the banner
+            Actor banner = new Actor();
+            Random random = new Random();
+            
+            
+             
+            
+            banner.SetText(banner.getValue().ToString());
+
+            banner.SetFontSize(FONT_SIZE);
+            banner.SetColor(WHITE);
+            banner.SetPosition(new Point(CELL_SIZE, 0));
+            cast.AddActor("banner", banner);
+
+            // create the robot
+            Actor robot = new Actor();
+            robot.SetText("#");
+            robot.SetFontSize(FONT_SIZE);
+            robot.SetColor(WHITE);
+            robot.SetPosition(new Point(100, 500));
+            cast.AddActor("robot", robot);
+
+
+
+
+
+
             _videoService.OpenWindow();
-            while (gameIsRunning)
+            while (_videoService.IsWindowOpen())
             {
                 GetInputs(cast);
                 DoUpdates(cast);
@@ -62,7 +91,7 @@ namespace Unit04.Game.Directing
             _videoService.CloseWindow();
         }
 
-        public void EndGame(Cast cast)
+        public void EndGame()
         {
             gameIsRunning = false;
         }
@@ -86,6 +115,8 @@ namespace Unit04.Game.Directing
             if (actorX<(robotX+CELL_SIZE+5)&&actorX>robotX&&actorY<(robotY+CELL_SIZE+5)&&actorY>robotY)
                 {
                     robot.SetColor(RED);
+                    EndGame();
+
                 }
             } 
         }
@@ -121,18 +152,20 @@ namespace Unit04.Game.Directing
             // banner.SetText(gravity.GetY().ToString());
             int maxX = _videoService.GetWidth();
             int maxY = _videoService.GetHeight();
+            if(gameIsRunning == true){
             robot.MoveNext(maxX, maxY);
-
+            }
             //ADD BASE LINE THAT ROBOT CANT GO BELOW 
              if (robot.GetPosition().GetY() > 500 ){
                     robot.SetPosition(bottom);
                 }
-
+            if(gameIsRunning == true){
                 foreach (Actor actor in artifacts)
             {
                 actor.MoveNext(maxX, maxY);
                count += 1;
             } 
+            }
         }
 
         /// <summary>
