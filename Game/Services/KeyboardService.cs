@@ -34,42 +34,21 @@ namespace Unit04.Game.Services
             int dy = 0;
             int velocity = 0;
 
-            // if (Raylib.IsKeyDown(KeyboardKey.KEY_LEFT))
-            // {
-            //     dx = -1;
-            // }
-
-            // if (Raylib.IsKeyDown(KeyboardKey.KEY_RIGHT))
-            // {
-            //     dx = 1;
-            // }
-
-
             if (Raylib.IsKeyDown(KeyboardKey.KEY_UP))
             {
                 dy = -50;
-                // velocity = 3;
             }
-
-            if (Raylib.IsKeyDown(KeyboardKey.RETURN))
-            {
-                StartGame()
-                // velocity = 3;
-            }
-
-
-            // if (Raylib.IsKeyDown(KeyboardKey.KEY_DOWN))
-            // {
-            //     dy = 20;
-            // }
-
             Point direction = new Point(dx, dy);
-            // direction = direction.Scale(_cellSize);
-
             return direction;
         }
-        public void EndScreenInput(){
-            
+
+        public bool EndScreenInput(){
+            bool again = false;
+            if (Raylib.IsKeyDown(KeyboardKey.KEY_ENTER))
+            {
+                again = true;
+            }
+            return again;
         }
     }
 }

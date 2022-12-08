@@ -32,6 +32,8 @@ namespace Unit04.Game.Directing
         private int count = 0;
         private int rand_x;
         private bool gameIsRunning = true;
+        private bool playAgain = false;
+
 
         /// <summary>
         /// Constructs a new instance of Director using the given KeyboardService and VideoService.
@@ -56,17 +58,11 @@ namespace Unit04.Game.Directing
             // create the banner
             Actor banner = new Actor();
             Random random = new Random();
-            
-            
-             
-            
             banner.SetText(banner.getValue().ToString());
-
             banner.SetFontSize(FONT_SIZE);
             banner.SetColor(WHITE);
             banner.SetPosition(new Point(CELL_SIZE, 0));
             cast.AddActor("banner", banner);
-
             // create the robot
             Actor robot = new Actor();
             robot.SetText("#");
@@ -74,13 +70,9 @@ namespace Unit04.Game.Directing
             robot.SetColor(WHITE);
             robot.SetPosition(new Point(100, 500));
             cast.AddActor("robot", robot);
-
-
-
-
-
-
+            playAgain = false;
             _videoService.OpenWindow();
+
             while (_videoService.IsWindowOpen())
             {
                 GetInputs(cast);
@@ -94,7 +86,9 @@ namespace Unit04.Game.Directing
         public void EndGame()
         {
             gameIsRunning = false;
-        }
+        } 
+
+
 
         /// <summary>
         /// Gets directional input from the keyboard and applies it to the robot.
@@ -123,7 +117,14 @@ namespace Unit04.Game.Directing
         private void GetInputs(Cast cast)
         {
             Actor robot = cast.GetFirstActor("robot");
-            
+
+
+            playAgain = _keyboardService.EndScreenInput();
+            if (gameIsRunning==false && playAgain==true){
+                _videoService.CloseWindow();
+                StartGame();
+            }
+
             if (robot.GetPosition().GetY()>480){
             gravity = gravity.Add(_keyboardService.GetDirection());}
             if (robot.GetPosition().GetY()<480){

@@ -19,6 +19,7 @@ namespace Unit04.Game.Casting
         /// </summary>
         public Cast()
         {
+
         }
 
         /// <summary>
