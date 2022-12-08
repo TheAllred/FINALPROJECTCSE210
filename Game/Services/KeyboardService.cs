@@ -53,6 +53,13 @@ namespace Unit04.Game.Services
                 // velocity = 3;
             }
 
+            if (Raylib.IsKeyDown(KeyboardKey.RETURN))
+            {
+                StartGame()
+                // velocity = 3;
+            }
+
+
             // if (Raylib.IsKeyDown(KeyboardKey.KEY_DOWN))
             // {
             //     dy = 20;
@@ -62,6 +69,9 @@ namespace Unit04.Game.Services
             // direction = direction.Scale(_cellSize);
 
             return direction;
+        }
+        public void EndScreenInput(){
+            
         }
     }
 }

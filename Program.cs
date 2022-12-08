@@ -21,10 +21,8 @@ namespace Unit04
         private static int CELL_SIZE = 15;
         private static int COLS = 60;
         private static int ROWS = 40;
-        private static int FONT_SIZE = 15;
         private static string CAPTION = "Robot Finds Kitten";
         private static string DATA_PATH = "Data/messages.txt";
-        private static Color WHITE = new Color(255, 255, 255);
         private static int DEFAULT_ARTIFACTS = 40;
     
         
@@ -39,31 +37,31 @@ namespace Unit04
         static void Main(string[] args)
         {
             // create the cast
-            Cast cast = new Cast();
+            // Cast cast = new Cast();
 
-            // create the banner
-            Actor banner = new Actor();
-            Random random = new Random();
+            // // create the banner
+            // Actor banner = new Actor();
+            // Random random = new Random();
             
             
              
             
-            banner.SetText(banner.getValue().ToString());
+            // banner.SetText(banner.getValue().ToString());
 
-            banner.SetFontSize(FONT_SIZE);
-            banner.SetColor(WHITE);
-            banner.SetPosition(new Point(CELL_SIZE, 0));
-            cast.AddActor("banner", banner);
+            // banner.SetFontSize(FONT_SIZE);
+            // banner.SetColor(WHITE);
+            // banner.SetPosition(new Point(CELL_SIZE, 0));
+            // cast.AddActor("banner", banner);
 
-            // create the robot
-            Actor robot = new Actor();
-            robot.SetText("#");
-            robot.SetFontSize(FONT_SIZE);
-            robot.SetColor(WHITE);
-            robot.SetPosition(new Point(100, 500));
-            cast.AddActor("robot", robot);
+            // // create the robot
+            // Actor robot = new Actor();
+            // robot.SetText("#");
+            // robot.SetFontSize(FONT_SIZE);
+            // robot.SetColor(WHITE);
+            // robot.SetPosition(new Point(100, 500));
+            // cast.AddActor("robot", robot);
 
-            // load the messages
+            // // load the messages
             // List<int> messages = File.ReadAllLines(DATA_PATH).ToList<int>();
 
 
@@ -73,7 +71,7 @@ namespace Unit04
                 = new VideoService(CAPTION, MAX_X, MAX_Y, CELL_SIZE, FRAME_RATE, false);
             RaylibAudioService audioService = new RaylibAudioService();
             Director director = new Director(keyboardService, videoService, audioService);
-            director.StartGame(cast);
+            director.StartGame();
         }
     }
 }
