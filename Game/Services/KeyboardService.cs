@@ -37,7 +37,7 @@ namespace Unit04.Game.Services
             if (Raylib.IsKeyDown(KeyboardKey.KEY_UP))
             {
                 dy = -50;
-                Casting.Sound sound = new Casting.Sound("/Users/sammie/git/FINALPROJECTCSE210/Assets/Sound/maro-jump-sound-effect_1.wav");
+                Casting.Sound sound = new Casting.Sound("Assets/Sound/maro-jump-sound-effect_1.wav");
                 audioService.PlaySound(sound);
             }
             Point direction = new Point(dx, dy);
