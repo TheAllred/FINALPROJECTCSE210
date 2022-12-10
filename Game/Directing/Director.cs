@@ -4,6 +4,10 @@ using Unit04.Game.Casting;
 using Unit04.Game.Services;
 
 
+
+
+
+
 namespace Unit04.Game.Directing
 {
     /// <summary>
@@ -17,10 +21,7 @@ namespace Unit04.Game.Directing
          private static Color WHITE = new Color(255, 255, 255);
         private static int FONT_SIZE = 15;
          private static int CELL_SIZE = 15;
-        private static int COLS = 60;
-        private static int ROWS = 40;
          private static int MAX_X = 900;
-        private static int MAX_Y = 600;
         private KeyboardService _keyboardService = null;
         private VideoService _videoService = null;
         private RaylibAudioService _audioService = null;
@@ -34,6 +35,8 @@ namespace Unit04.Game.Directing
         private int rand_x;
         private bool gameIsRunning = true;
         private bool playAgain = false;
+        private Point falling = new Point(-20, 0);
+        
 
 
         /// <summary>
@@ -75,21 +78,26 @@ namespace Unit04.Game.Directing
             playAgain = false;
             _videoService.OpenWindow();
             _audioService.Initialize();
-            _audioService.LoadSounds("/Users/sammie/git/FINALPROJECTCSE210/Assets/Sound");
+            _audioService.LoadSounds("Assets/Sound");
              while (_videoService.IsWindowOpen())
             {
                 GetInputs(cast);
                 DoUpdates(cast);
                 HandleCollisions(cast);
                 DoOutputs(cast);
+                
             }
+           
+            
             // _audioService.UnloadSounds();
-            _videoService.CloseWindow();
+
         }
 
         public void EndGame()
         {
+            
             gameIsRunning = false;
+          _videoService.DrawEndScreen();
         } 
 
 
@@ -110,33 +118,34 @@ namespace Unit04.Game.Directing
                 int robotX = robot.GetPosition().GetX()-5;
                 int robotY = robot.GetPosition().GetY()-5;
 
-            if (actorX<(robotX+CELL_SIZE+5)&&actorX>robotX&&actorY<(robotY+CELL_SIZE+5)&&actorY>robotY)
+            if (actorX<(robotX+CELL_SIZE)&&actorX>robotX&&actorY<(robotY+CELL_SIZE+5)&&actorY>robotY)
                 {
                     robot.SetColor(RED);
                     EndGame();
-
                 }
             } 
         }
         private void GetInputs(Cast cast)
         {
             Actor robot = cast.GetFirstActor("robot");
-
-
             playAgain = _keyboardService.EndScreenInput();
             if (gameIsRunning==false && playAgain==true){
-                _videoService.CloseWindow();
-                StartGame();
+            count = 0;
+            robot.SetColor(WHITE);
+            gameIsRunning = true;
             }
 
             if (robot.GetPosition().GetY()>480){
             gravity = gravity.Add(_keyboardService.GetDirection(_audioService));}
+
             if (robot.GetPosition().GetY()<480){
             gravity = gravity.Add(gravityCONST);
             }
+
             if (robot.GetPosition().GetY()>485){
                 gravity = stopped.Add(_keyboardService.GetDirection(_audioService));
             }
+
             robot.SetVelocity(gravity);     
         }
 
@@ -146,29 +155,29 @@ namespace Unit04.Game.Directing
         /// <param name="cast">The given cast.</param>
         private void DoUpdates(Cast cast)
         {
+            int maxX = _videoService.GetWidth();
+            int maxY = _videoService.GetHeight();
+            // Point speedUP = new Point(-(count/200), 0);
             Actor banner = cast.GetFirstActor("banner");
             Actor robot = cast.GetFirstActor("robot");
             List<Actor> artifacts = cast.GetActors("artifacts");
-
-            // banner.SetText(banner.getValue().ToString());
-            // banner.SetText(robot.GetPosition().GetY().ToString());
             banner.SetText(count.ToString());
-
-            // banner.SetText(gravity.GetY().ToString());
-            int maxX = _videoService.GetWidth();
-            int maxY = _videoService.GetHeight();
             if(gameIsRunning == true){
             robot.MoveNext(maxX, maxY);
+            count += 1;
             }
+
             //ADD BASE LINE THAT ROBOT CANT GO BELOW 
              if (robot.GetPosition().GetY() > 500 ){
                     robot.SetPosition(bottom);
                 }
+                
             if(gameIsRunning == true){
                 foreach (Actor actor in artifacts)
             {
+                // Speed up artifacts-- Breaks collision handling
+                // actor.SetVelocity(actor.GetVelocity().Add(speedUP));
                 actor.MoveNext(maxX, maxY);
-               count += 1;
             } 
             }
         }
@@ -200,25 +209,25 @@ namespace Unit04.Game.Directing
             position = position.Scale(15);
             rand_x = random.Next(900, 1800);
             if(gemOrRock <= 7){
-                text = "1";
+                text = "@";
                 Point _point1 = new Point(MAX_X,500);
                 position = _point1;
             }
             else if(gemOrRock == 8){
-                text = "2";
+                text = "@";
                 Point _point2 = new Point(MAX_X,400);
                 position = _point2;
             }
             else{
-                text = "0";
+                text = "@";
                 Point _point3 = new Point(MAX_X,350);
                 position = _point3;
                     
             }
 
-            int r = random.Next(0, 256);
-            int g = random.Next(0, 256);
-            int b = random.Next(0, 256);
+            int r = random.Next(50, 256);
+            int g = random.Next(50, 256);
+            int b = random.Next(50, 256);
             Color color = new Color(r, g, b);
 
             Artifact artifact = new Artifact();
@@ -227,7 +236,6 @@ namespace Unit04.Game.Directing
             artifact.SetColor(color);
             artifact.SetPosition(position);
             artifact.SetMessage(message);
-            Point falling = new Point(-20, 0);
             artifact.SetVelocity(falling);
             cast.AddActor("artifacts", artifact);
         }

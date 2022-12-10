@@ -32,7 +32,7 @@ namespace Unit04.Game.Services
         {
             int dx = 0;
             int dy = 0;
-            int velocity = 0;
+
 
             if (Raylib.IsKeyDown(KeyboardKey.KEY_UP))
             {

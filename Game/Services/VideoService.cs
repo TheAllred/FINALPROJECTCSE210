@@ -43,6 +43,11 @@ namespace Unit04.Game.Services
             Raylib.CloseWindow();
         }
 
+        public void DrawEndScreen(){
+             Raylib.DrawText("GAME OVER!", _width/2-100, _height/2, 60, Raylib_cs.Color.WHITE);
+             Raylib.DrawText("Press enter to play again", _width/2-100, _height/2+50, 20, Raylib_cs.Color.WHITE);
+        }
+
         /// <summary>
         /// Clears the buffer in preparation for the next rendering. This method should be called at
         /// the beginning of the game's output phase.
